@@ -1,42 +1,103 @@
-let IP = [192, 168, 10, 3];
-let subnet = 27;
+const form = document.getElementById('myForm');
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const IP = document.getElementById('IP').value;
+    const subnet = document.getElementById('subnet').value;
+    const convertSubnetToNumber = parseInt(subnet);
+
+    // alert(`
+    //     IP: ${IP}
+    //     Subnet: ${subnet}
+    // `);
+    console.log(cariNetwork(IP));
+    console.log(cariSubnetmask(convertSubnetToNumber));
+    console.log(cariJmlSubnet(convertSubnetToNumber));
+    console.log(cariJmlHostPerSubnet(convertSubnetToNumber));
+})
+
+
+
+// // let IP = [192, 168, 10, 3];
+// let IP = "192.168.10.3";
+// let subnet = 25;
 
 function cariNetwork(IP) {
-    IP.pop();
-    IP.push(0)
-    return IP;
+    // IP.pop();
+    // IP.push(0)
+    // return IP;
+
+    const splitIP = IP.split(".");
+    splitIP.pop()
+    splitIP.push(0);
+
+    const newNetwork = `${splitIP[0]}.${splitIP[1]}.${splitIP[2]}.${splitIP[3]}`
+    return newNetwork;
 }
 
 function cariSubnetmask(subnet) {
     let hasilCari = '255.255.255.';
+    let hasilPangkat = 0;
     switch (subnet) {
         case 24:
-            hasilCari += '0';
+            for (let i = 7; i > 7; i--) {
+                hasilPangkat += 2 ** i;
+            }
+            // console.log(hasilPangkat);
+            hasilCari += `${hasilPangkat}`; //0
             break;
         case 25:
-            hasilCari += '128';
+            for (let i = 7; i > 6; i--) {
+                hasilPangkat += 2 ** i;
+            }
+            // console.log(hasilPangkat);
+            hasilCari += `${hasilPangkat}`; //128
             break;
         case 26:
-            hasilCari += '192';
+            for (let i = 7; i > 5; i--) {
+                hasilPangkat += 2 ** i;
+            }
+            // console.log(hasilPangkat);
+            hasilCari += `${hasilPangkat}`; //192
             break;
         case 27:
-            hasilCari += '224';
+            for (let i = 7; i > 4; i--) {
+                hasilPangkat += 2 ** i;
+            }
+            // console.log(hasilPangkat);
+            hasilCari += `${hasilPangkat}`; //224
             break;
         case 28:
-            hasilCari += '240';
+            for (let i = 7; i > 3; i--) {
+                hasilPangkat += 2 ** i;
+            }
+            // console.log(hasilPangkat);
+            hasilCari += `${hasilPangkat}`; //240
             break;
         case 29:
-            hasilCari += '248';
+            for (let i = 7; i > 2; i--) {
+                hasilPangkat += 2 ** i;
+            }
+            // console.log(hasilPangkat);
+            hasilCari += `${hasilPangkat}`; //248
             break;
         case 30:
-            hasilCari += '252';
+            for (let i = 7; i > 1; i--) {
+                hasilPangkat += 2 ** i;
+            }
+            // console.log(hasilPangkat);
+            hasilCari += `${hasilPangkat}`; //252
             break;
         case 31:
-            hasilCari += '254';
+            for (let i = 7; i > 0; i--) {
+                hasilPangkat += 2 ** i;
+            }
+            // console.log(hasilPangkat);
+            hasilCari += `${hasilPangkat}`; //254
             break;
 
         default:
-            hasilCari = 0;
+            hasilCari = 'Bukan IP class C';
             break;
     }
 
@@ -72,6 +133,7 @@ function cariJmlSubnet(subnet) {
             break;
 
         default:
+            jmlSubnet = 'Bukan IP class C';
             break;
     }
     return jmlSubnet;
@@ -113,7 +175,7 @@ function cariJmlHostPerSubnet(subnet) {
 
 
 
-console.log(cariNetwork(IP));
-console.log(cariSubnetmask(subnet));
-console.log(cariJmlSubnet(subnet));
-console.log(cariJmlHostPerSubnet(subnet));
+// console.log(cariNetwork(IP));
+// console.log(cariSubnetmask(subnet));
+// console.log(cariJmlSubnet(subnet));
+// console.log(cariJmlHostPerSubnet(subnet));
