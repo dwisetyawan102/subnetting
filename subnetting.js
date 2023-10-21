@@ -6,27 +6,23 @@ form.addEventListener('submit', function (event) {
     const subnet = document.getElementById('subnet').value;
     const convertSubnetToNumber = parseInt(subnet);
 
-    // alert(`
-    //     IP: ${IP}
-    //     Subnet: ${subnet}
-    // `);
-    console.log(cariNetwork(IP));
-    console.log(cariSubnetmask(convertSubnetToNumber));
-    console.log(cariJmlSubnet(convertSubnetToNumber));
-    console.log(cariJmlHostPerSubnet(convertSubnetToNumber));
+    let resultCariNetwork = cariNetwork(IP);
+    let resultCariSubnetmask = cariSubnetmask(convertSubnetToNumber);
+    let resultCariJmlSubnet = cariJmlSubnet(convertSubnetToNumber);
+    let resultCariJmlHostPerSubnet = cariJmlHostPerSubnet(convertSubnetToNumber);
+
+    let hasilNetwork = document.getElementById('hasil-network');
+    let hasilSubnetmask = document.getElementById('hasil-subnetmask');
+    let hasilJumlahsubnet = document.getElementById('hasil-jumlahSubnet');
+    let hasilJmlHostPerSubnet = document.getElementById('hasil-jmlHostPerSubnet');
+
+    hasilNetwork.innerHTML = resultCariNetwork;
+    hasilSubnetmask.innerHTML = resultCariSubnetmask;
+    hasilJumlahsubnet.innerHTML = resultCariJmlSubnet;
+    hasilJmlHostPerSubnet.innerHTML = resultCariJmlHostPerSubnet;
 })
 
-
-
-// // let IP = [192, 168, 10, 3];
-// let IP = "192.168.10.3";
-// let subnet = 25;
-
 function cariNetwork(IP) {
-    // IP.pop();
-    // IP.push(0)
-    // return IP;
-
     const splitIP = IP.split(".");
     splitIP.pop()
     splitIP.push(0);
